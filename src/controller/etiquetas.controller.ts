@@ -25,3 +25,21 @@ export async function selectEtiquetas() {
   const [rows] = await conn.query("SELECT * FROM etiquetas;");
   return rows;
 }
+
+export async function deleteEtiqueta(id: String) {
+  const conn = await dbEtiquetasPrint.connect();
+  const sql = "DELETE FROM etiquetas WHERE ID=?";
+  const values = [[id]];
+  conn.query(sql, [values], function (err: any) {
+    if (err) {
+      return err;
+    } else {
+      conn.end();
+      return "Sucess";
+    }
+  });
+  return "Sucess";
+}
+
+
+
