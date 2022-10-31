@@ -12,7 +12,6 @@ export async function insertEtiquetas(
     if (err) {
       return err;
     } else {
-      conn.end();
       return "Sucess";
     }
   });
@@ -34,7 +33,6 @@ export async function deleteEtiqueta(id: String) {
     if (err) {
       return err;
     } else {
-      conn.end();
       return "Sucess";
     }
   });
