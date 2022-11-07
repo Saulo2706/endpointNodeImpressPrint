@@ -23,18 +23,9 @@ export async function insertEtiquetas(
 
 export async function selectEtiquetas() {
   const conn = await dbEtiquetasPrint.connect();
-  //const [rows] = await conn.query("SELECT * FROM etiquetas;");
-  conn.query("SELECT * FROM etiquetas;", function (err: any, result: any, fields: any) {
-    if (err) {
-        console.log(`not successful! ${err}`)
-        //conn.destroy();
-    } else {
-        console.log(`Query was successful, ${result}`)
-        //conn.destroy();
-        return result
-    }
+  const [rows] = await conn.query("SELECT * FROM etiquetas;");
+  return rows;
 
-  })
 }
 
 export async function deleteEtiqueta(id: String) {
