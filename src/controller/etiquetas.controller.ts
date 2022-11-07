@@ -27,10 +27,10 @@ export async function selectEtiquetas() {
   conn.query("SELECT * FROM etiquetas;", function (err: any, result: any, fields: any) {
     if (err) {
         console.log(`not successful! ${err}`)
-        conn.destroy();
+        //conn.destroy();
     } else {
         console.log(`Query was successful, ${result}`)
-        conn.destroy();
+        //conn.destroy();
         return result
     }
 
