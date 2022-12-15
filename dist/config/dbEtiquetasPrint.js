@@ -1,16 +1,28 @@
 require('dotenv').config()
 
-let stringCon = "mysql://" + process.env.DBUSERINTRANET + ":" + process.env.DBPWINTRANET + "@" + process.env.DBHOSTINTRANET + ":3306/" + process.env.DBNAMEINTRANET
+module.exports = function () {
 
-async function connect(){
-    if(global.connection && global.connection.state !== 'disconnected')
-        return global.connection;
- 
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection(stringCon);
-    //console.log("Conectou no MySQL!");
-    global.connection = connection;
-    return connection;
+    let mysql = require('mysql2')
+    //let connCreds = require('./connectionsConfig.json');
+
+    //Establish Connection to the DB
+    let connection = mysql.createConnection({
+        host: process.env.DBHOSTINTRANET,
+        user: process.env.DBUSERINTRANET,
+        password: process.env.DBPWINTRANET,
+        database: process.env.DBNAMEINTRANET,
+        port: 3306
+    });
+
+    //Instantiate the connection
+    connection.connect(function (err) {
+        if (err) {
+            console.log(`connectionRequest Failed ${err.stack}`)
+        } else {
+            console.log(`DB connectionRequest Successful ${connection.threadId}`)
+        }
+    });
+
+    //return connection object
+    return connection
 }
-
-module.exports = {connect}

@@ -38,6 +38,18 @@ exports.etiquetasRoutes.post("/etiqueta", upload.single("foto"), (req, res) => _
     }
 }));
 exports.etiquetasRoutes.get("/etiquetas", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const etiquetas = yield (0, etiquetas_controller_1.selectEtiquetas)();
-    return res.json(etiquetas);
+    const etiquetas = (0, etiquetas_controller_1.selectEtiquetas)(res);
+    //console.log("etiquetas: " + etiquetas)
+    // return res.status(200).json(etiquetas);
+}));
+exports.etiquetasRoutes.delete("/etiquetas/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.params.id);
+    const id = req.params.id;
+    const resultado = yield (0, etiquetas_controller_1.deleteEtiqueta)(id);
+    if (resultado == "Sucess") {
+        res.status(200).send();
+    }
+    else {
+        return res.status(405).send(resultado);
+    }
 }));

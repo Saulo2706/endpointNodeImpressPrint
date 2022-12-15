@@ -30,8 +30,10 @@ etiquetasRoutes.post("/etiqueta", upload.single("foto"), async (req, res) => {
 });
 
 etiquetasRoutes.get("/etiquetas", async (req, res) => {
-  const etiquetas = await selectEtiquetas();
-  return res.status(200).json(etiquetas);
+  const etiquetas = selectEtiquetas(res);
+  //console.log("etiquetas: " + etiquetas)
+
+ // return res.status(200).json(etiquetas);
 });
 
 etiquetasRoutes.delete("/etiquetas/:id", async (req, res) => {
